@@ -1,0 +1,24 @@
+{
+  "data": {
+    "products": {
+      "edges": [
+        {
+          "node": {
+            "handle": "cafe-aroma-dark-espresso-shot",
+            "title": "Café Aroma Dark Espresso Shot"
+          }
+        }
+      ]
+    },
+    "collections": {
+      "edges": [
+        {
+          "node": {
+            "handle": "frontpage",
+            "title": "Home page"
+          }
+        }
+      ]
+    }
+  }
+}
