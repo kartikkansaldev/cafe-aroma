@@ -1,0 +1,49 @@
+
+> cafe-aroma-website@1.0.0 predeploy
+> npm run build
+
+
+> cafe-aroma-website@1.0.0 build
+> vite build
+
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+<script src="lazy_load_videos.js"> in "/index.html" can't be bundled without type="module" attribute
+transforming...
+[32mΓ£ô[39m 22 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/[22m[32mblog.html                                          [39m[1m[2m    8.81 kB[22m[1m[22m[2m Γöé gzip: 2.72 kB[22m
+[2mdist/[22m[32mcollections.html                                   [39m[1m[2m   10.10 kB[22m[1m[22m[2m Γöé gzip: 3.06 kB[22m
+[2mdist/[22m[32marticle.html                                       [39m[1m[2m   10.63 kB[22m[1m[22m[2m Γöé gzip: 3.96 kB[22m
+[2mdist/[22m[32mproduct.html                                       [39m[1m[2m   11.06 kB[22m[1m[22m[2m Γöé gzip: 3.30 kB[22m
+[2mdist/[22m[32mindex.html                                         [39m[1m[2m   31.64 kB[22m[1m[22m[2m Γöé gzip: 7.91 kB[22m
+[2mdist/[22m[32massets/journal1-DBdKpJoe.png                       [39m[1m[2m   65.02 kB[22m[1m[22m
+[2mdist/[22m[32massets/photo1-CGYBvw0a.png                         [39m[1m[2m   70.13 kB[22m[1m[22m
+[2mdist/[22m[32massets/photo2-DrV_c_43.png                         [39m[1m[2m   71.23 kB[22m[1m[22m
+[2mdist/[22m[32massets/journal3-BFOQXibu.png                       [39m[1m[2m   77.96 kB[22m[1m[22m
+[2mdist/[22m[32massets/journal2-Dehxg_oX.png                       [39m[1m[2m   96.89 kB[22m[1m[22m
+[2mdist/[22m[32massets/product-french-vanilla-D3E10fgV.jpg         [39m[1m[2m  186.40 kB[22m[1m[22m
+[2mdist/[22m[32massets/product-dark-espresso-BSp5CzE-.jpg          [39m[1m[2m  194.52 kB[22m[1m[22m
+[2mdist/[22m[32massets/product-hazelnut-brew-Bmfjzn4o.jpg          [39m[1m[2m  270.06 kB[22m[1m[22m
+[2mdist/[22m[32massets/video-overflow-french-vanilla-Cc4bbFiA.mp4  [39m[1m[2m5,588.61 kB[22m[1m[22m
+[2mdist/[22m[32massets/video-overflow-hazelnut-brew-DzeXH5z3.mp4   [39m[1m[2m6,461.04 kB[22m[1m[22m
+[2mdist/[22m[32massets/video-overflow-dark-espresso-XcrzYrzJ.mp4   [39m[1m[2m6,669.75 kB[22m[1m[22m
+[2mdist/[22m[35massets/main-C_6Piasz.css                           [39m[1m[2m    2.41 kB[22m[1m[22m[2m Γöé gzip: 0.85 kB[22m
+[2mdist/[22m[35massets/footer-B0Yn5mFe.css                         [39m[1m[2m    7.47 kB[22m[1m[22m[2m Γöé gzip: 2.08 kB[22m
+[2mdist/[22m[35massets/products-Bf8lmOF7.css                       [39m[1m[2m   10.01 kB[22m[1m[22m[2m Γöé gzip: 2.53 kB[22m
+[2mdist/[22m[36massets/modulepreload-polyfill-B5Qt9EMX.js          [39m[1m[2m    0.71 kB[22m[1m[22m[2m Γöé gzip: 0.40 kB[22m
+[2mdist/[22m[36massets/main-DQOc8LKs.js                            [39m[1m[2m    1.57 kB[22m[1m[22m[2m Γöé gzip: 0.58 kB[22m
+[32mΓ£ô built in 246ms[39m
+
+> cafe-aroma-website@1.0.0 deploy
+> gh-pages -d dist
+
+ProcessError: error: Your local changes to the following files would be overwritten by checkout:
+	dist/index.html
+Please commit your changes or stash them before you switch branches.
+Aborting
+
+    at ChildProcess.<anonymous> (C:\Users\karti\Downloads\cafearoma 3\node_modules\gh-pages\lib\git.js:42:16)
+    at ChildProcess.emit (node:events:508:20)
+    at maybeClose (node:internal/child_process:1084:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5)

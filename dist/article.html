@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Journal | Cafe Aroma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { max-width: 100vw !important; overflow-x: hidden !important; }
+        body { background-color: #EAE0CD; color: #2C1810; font-family: 'Inter', sans-serif; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        .nav-container { background: rgba(234, 224, 205, 0.95); padding: 24px 100px; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; width: 100%; box-sizing: border-box; z-index: 100; backdrop-filter: blur(12px);  }
+        .logo { font-family: 'Playfair Display', serif; font-size: 24px; color: #2C1810; text-decoration: none; font-style: italic; }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-link { color: #2C1810; text-decoration: none; font-size: 16px; opacity: 0.8; text-transform: uppercase; font-weight: 500; letter-spacing: 0.05em; }
+        .nav-link:hover { opacity: 1; }
+        .article-container { max-width: 800px; margin: 100px auto 0; padding: 40px 20px; flex: 1; }
+        .article-header { text-align: center; margin-bottom: 30px; }
+        .article-category { font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: #6e5c4f; display: block; margin-bottom: 16px; font-weight: 600; }
+        .article-title { font-family: 'Playfair Display', serif; font-size: clamp(40px, 6vw, 64px); line-height: 1.1; margin-bottom: 24px; color: #2C1810; }
+        .article-meta { font-size: 13px; color: #6e5c4f; }
+        .article-image { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; margin-bottom: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .article-content { font-size: 18px; line-height: 1.8; color: #3a2e28; }
+        .article-content p { margin-bottom: 24px; }
+        .article-content h2 { font-family: 'Playfair Display', serif; font-size: 32px; margin: 30px 0 16px; color: #2C1810; }
+        .dropcap { float: left; font-family: 'Playfair Display', serif; font-size: 80px; line-height: 60px; padding-top: 4px; padding-right: 8px; padding-left: 3px; color: #2C1810; }
+        .article-content blockquote { border-left: 2px solid #2C1810; margin: 40px 0; padding: 10px 0 10px 40px; font-family: 'Playfair Display', serif; font-size: 32px; font-style: italic; color: #2C1810; line-height: 1.4; }
+        .article-inline-image { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; margin: 30px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    @media (max-width: 768px) { .nav-container { padding: 10px 15px !important; flex-wrap: nowrap !important; } .nav-links { gap: 10px !important; flex-wrap: nowrap !important; } .article-container { margin-top: 80px !important; padding: 40px 15px !important; } .article-title { font-size: 32px !important; } .article-content { font-size: 16px !important; } .dropcap { font-size: 60px !important; line-height: 50px !important; } } </style>
+  <link rel="stylesheet" crossorigin href="/cafe-aroma/assets/footer-B0Yn5mFe.css">
+</head>
+<body>
+    <nav class="nav-container">
+        <a href="index.html" class="logo">Cafe Aroma</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="collections.html" class="nav-link">Shop</a>
+            <a href="blog.html" class="nav-link">Journal</a>
+        </div>
+    </nav>
+    <main class="article-container" id="article-main"></main>
+    
+    <footer class="big-footer" id="site-footer">
+      <div class="footer-directory">
+        <div class="footer-col">
+          <h4>Shop and Learn</h4>
+          <a href="#">Dark Espresso</a>
+          <a href="#">French Vanilla</a>
+          <a href="#">Hazelnut Brew</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="#">Contact Us</a>
+          <a href="#">FAQs</a>
+        </div>
+      </div>
+      <div class="footer-basement">
+        <div class="basement-bottom">
+          <p class="copyright">Copyright © 2026 Cafe Aroma Inc. All rights reserved.</p>
+          <div class="legal-links"><a href="#">Privacy Policy</a> <a href="#">Terms of Use</a></div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        const articles = {
+            'art-of-pour': {
+                title: "The Art of the Pour",
+                category: "Brewing Guide",
+                date: "Oct 12, 2025",
+                image: "images/journal1.png",
+                content: `<p><span class="dropcap">T</span>here is a moment of stillness just before the water hits the grounds. The kettle is poised, the temperature is absolute, and the room goes suddenly quiet. It's in this fraction of a second that the ritual of coffee breaks away from standard consumption and becomes an art form.</p>
+                <img src="images/article2.png" alt="Pour over setup" class="article-inline-image">
+                <h2>Consistency is Key</h2>
+                <p>Why does your morning cup sometimes taste divine, and other days fall flat? The secret lies in the extraction. When hot water washes over the fresh grounds, a delicate balance of acids, sugars, and bitter compounds are pulled into the vessel below.</p>
+                <p>By controlling your pour rate—moving the gooseneck kettle in slow, mesmerizing concentric circles—you ensure every single grain of coffee experiences the exact same thermal journey.</p>
+                <blockquote>"A good pour isn't rehearsed; it's felt. The weight of the kettle, the bloom of the beans—it's a choreography of flavor."</blockquote>
+                <p>As the bloom settles, you'll see tiny bubbles rise to the surface. That is carbon dioxide escaping. Fresh beans release gas, ensuring the water can evenly penetrate the cellular structure of the roast.</p>
+                <p>Mastering the pour takes patience. Keep your ratios tight, your water just off boil, and let gravity do the beautiful work it was designed to do.</p>`
+            },
+            'chemistry-of-roast': {
+                title: "Chemistry of the Roast",
+                category: "Artisan Craft",
+                date: "Nov 02, 2025",
+                image: "images/journal3.png",
+                content: `<p><span class="dropcap">R</span>oasting coffee is an alchemy of heat, time, and precise scientific reaction. Long before a bean reaches your cup, it undergoes a radical transformation inside a glowing drum at 400 degrees Fahrenheit.</p>
+                <img src="images/article1.png" alt="Coffee beans cooling" class="article-inline-image">
+                <h2>The Maillard Reaction</h2>
+                <p>As the green, grassy beans absorb heat, they begin to turn yellow, then a pale brown. This is the Maillard reaction—the same browning process that gives freshly baked bread or seared steak its irresistible aroma.</p>
+                <p>During this phase, amino acids and reducing sugars bond to form hundreds of volatile flavor compounds. It is here that the deeply embedded notes of chocolate, berries, shifting caramel, and toasted nuts are born.</p>
+                <blockquote>"We don't just roast coffee. We are unlocking the hidden potential locked inside every seed by the sun and soil."</blockquote>
+                <p>When the internal pressure of the bean becomes too great, an audible 'crack' echoes through the roastery. This is first crack. Depending on the master roaster's vision, the journey may end here for a bright, acidic light roast, or continue into the dark, oily depths of an espresso blend.</p>`
+            },
+            'sourcing-sustainability': {
+                title: "Sourcing with Mind",
+                category: "Sustainability",
+                date: "Sept 28, 2025",
+                image: "images/journal2.png",
+                content: `<p><span class="dropcap">G</span>reat coffee starts at the source. Long before we apply our artisan roasting curve, we spend months traversing the coffee belt to find farms that treat their soil with the respect it deserves.</p>
+                <blockquote>"Sustainability isn't a buzzword. It is the only mathematical way the coffee industry survives the next century."</blockquote>
+                <p>By purchasing Fair Trade and directly supporting single-origin estates, we ensure that the farmers receive a living wage that supports their local communities.</p>`
+            }
+        };
+        const handle = new URLSearchParams(window.location.search).get('handle');
+        const main = document.getElementById('article-main');
+        if (handle && articles[handle]) {
+            const art = articles[handle];
+            main.innerHTML = `
+                <div class="article-header">
+                    <span class="article-category">${art.category}</span>
+                    <h1 class="article-title">${art.title}</h1>
+                    <div class="article-meta">${art.date}</div>
+                </div>
+                <img src="${art.image}" class="article-image">
+                <article class="article-content">${art.content}</article>
+            `;
+        }
+    </script>
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/7986840344" target="_blank" class="whatsapp-float" aria-label="Chat with us on WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span>Chat Now</span>
+  </a>
+
+  <style>
+    .whatsapp-float {
+        position: fixed; bottom: 40px; right: 40px;
+        background: #2C1810; color: #FFF;
+        padding: 12px 24px; border-radius: 50px;
+        display: flex; align-items: center; gap: 10px;
+        text-decoration: none; font-family: 'Inter', sans-serif;
+        font-weight: 600; font-size: 14px;
+        z-index: 9999; box-shadow: 0 10px 25px rgba(44, 24, 16, 0.2);
+        transition: transform 0.3s, background 0.3s;
+    }
+    .whatsapp-float:hover { transform: translateY(-5px); background: #4a2c1a; }
+    .whatsapp-float svg { width: 20px; height: 20px; }
+    @media (max-width: 768px) {
+        .whatsapp-float { bottom: 20px; right: 20px; padding: 10px 18px; }
+        .whatsapp-float span { display: none; }
+    }
+  </style>
+</body>
+</html>
