@@ -278,7 +278,7 @@
   <!-- THE ROAST -->
  <section class="premium-video-section">
    <!-- Replace src with your video when ready -->
-   <video class="premium-video-bg" autoplay loop muted playsinline><source src="videos/video1.mp4" type="video/mp4"></video>
+   <video class="premium-video-bg" loop muted playsinline data-src="videos/video1.mp4"></video>
    <div class="premium-overlay" style="background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));"></div>
    <div class="premium-content">
      <span class="premium-label">THE PROCESS</span>
@@ -289,7 +289,7 @@
  <!-- THE GRIND -->
  <section class="premium-video-section">
    <!-- Replace src with your video when ready -->
-   <video class="premium-video-bg" autoplay loop muted playsinline><source src="videos/video2.mp4" type="video/mp4"></video>
+   <video class="premium-video-bg" loop muted playsinline data-src="videos/video2.mp4"></video>
    <div class="premium-overlay" style="background: rgba(0,0,0,0.3);"></div>
    <div class="premium-content" style="text-align: left; margin-left: 0; max-width: 1200px; width: 100%;">
       <div style="max-width: 500px;">
@@ -347,9 +347,7 @@
  
    <!-- NEW EXPERIENCE VIDEO -->
   <section class="premium-video-section" id="sensory-experience">
-    <video class="premium-video-bg" autoplay muted loop playsinline>
-      <source src="videos/VID_20260403_023457_200_bsl.mp4" type="video/mp4">
-    </video>
+    <video class="premium-video-bg" loop muted playsinline data-src="videos/VID_20260403_023457_200_bsl.mp4"></video>
     <div class="premium-overlay"></div>
     <div class="premium-content">
       <span class="premium-label">Sensory Experience</span>
@@ -497,14 +495,6 @@
     }
   </style>
 
-  <!-- Enforce autoplay on premium background videos -->
-  <script>
-    window.addEventListener('load', () => {
-      document.querySelectorAll('.premium-video-bg').forEach(video => {
-        video.muted = true;
-        video.play().catch(e => console.log('Premium video autoplay blocked:', e));
-      });
-    });
-  </script>
+  <script src="lazy_load_videos.js"></script>
 </body>
 </html>

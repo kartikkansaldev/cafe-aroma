@@ -2,7 +2,10 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
-  base: '/cafe-aroma/',
+  base: process.env.NODE_ENV === 'production' ? '/cafe-aroma/' : '/',
+  server: {
+    port: 3000,
+  },
   build: {
     rollupOptions: {
       input: {
