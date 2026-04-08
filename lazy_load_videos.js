@@ -9,6 +9,7 @@ function initVideoLazyLoad() {
                     if (!video.src && video.dataset.src) {
                         video.src = video.dataset.src;
                         video.muted = true;
+                        video.load();
                     }
                     const playPromise = video.play();
                     if (playPromise !== undefined) {

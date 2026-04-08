@@ -342,9 +342,11 @@
 
           if (vid.hasAttribute('src') && vid.src) {
             vid.src = blobUrl;
+            vid.load();
           } else if (vid.querySelector('source')) {
-            // Update source tag or just assign to video src directly
+            Array.from(vid.querySelectorAll('source')).forEach(s => s.remove());
             vid.src = blobUrl;
+            vid.load();
           } else {
             vid.dataset.src = blobUrl;
           }
