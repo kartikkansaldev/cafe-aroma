@@ -1,188 +1,481 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Cafe Aroma | Brewed to Perfection</title>
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="css/hero-carousel.css">
- <link rel="stylesheet" href="css/products.css">
- <link rel="stylesheet" href="css/footer.css">
-  <link rel="stylesheet" href="css/features.css">
- <style>
-        *, *::before, *::after { box-sizing: border-box; }
-        html, body { max-width: 100vw !important; overflow-x: hidden !important; }
-   html.lenis, html.lenis body { height: auto; }
-   .lenis.lenis-smooth { scroll-behavior: auto !important; }
-   .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-   .lenis.lenis-stopped { overflow: hidden; }
-   .lenis.lenis-scrolling iframe { pointer-events: none; }
-   .nav-container {
-       position: fixed; top: 0; width: 100%; z-index: 1000; background: transparent; transition: background 0.3s ease;
-       padding: 24px 100px; display: flex; justify-content: space-between;
-       align-items: center; box-sizing: border-box; pointer-events: none;
-   }
-   .nav-container > * { pointer-events: auto; }
-   .logo {
-       font-family: 'Playfair Display', serif; font-size: 24px;
-       font-weight: 700; color: #2C1810; text-decoration: none; font-style: italic;
-   }
-   .nav-links { display: flex; gap: 24px; }
-   .nav-link {
-       color: #2C1810; text-decoration: none; font-size: 16px; font-weight: 500;
-       letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.8;
-       transition: opacity 0.3s;
-   }
-   .nav-link:hover, .nav-link.active { opacity: 1; }
-   .premium-video-section {
-       position: relative; height: 60vh; min-height: 450px;
-       overflow: hidden; display: flex; align-items: center;
-       justify-content: center; color: #FFF;
-   }
-   .premium-video-bg {
-       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-       object-fit: cover; z-index: 0;
-   }
-   .premium-overlay {
-       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-       background: rgba(0, 0, 0, 0.4); z-index: 1;
-   }
-   .premium-content {
-       position: relative; z-index: 2; text-align: center;
-       max-width: 800px; padding: 0 20px;
-   }
-   .premium-label {
-       font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.2em;
-       text-transform: uppercase; font-weight: 600; color: var(--color-caramel);
-       display: block; margin-bottom: 16px;
-   }
-   .premium-headline {
-       font-family: 'Playfair Display', serif; font-size: 44px; line-height: 1.1;
-       margin-bottom: 24px; font-style: italic;
-   }
-   .premium-text {
-       font-family: 'Inter', sans-serif; font-size: 12px; line-height: 1.6;
-       max-width: 400px; margin: 0 auto;
-   }
-   .nav-container.scrolled {
-        background: #EDE0D4; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    }
-  @media (max-width: 768px) { .nav-container { padding: 12px 16px !important; flex-wrap: nowrap !important; } .nav-links { gap: 8px !important; flex-wrap: nowrap !important; } .logo { font-size: 16px !important; white-space: nowrap !important; } .nav-link { font-size: 10px !important; letter-spacing: 0 !important; white-space: nowrap !important; } .premium-headline { font-size: 32px !important; } .testimonials-title { font-size: 32px !important; } .testimonial-card { padding: 50px 16px 30px !important; } .testimonial-text { font-size: 13px !important; } .testimonial-nav { display: none !important; } }  #cart { width: 100%; max-width: 450px; height: 100%; max-height: 100vh; position: fixed; right: 0; left: auto; margin: 0; border: none; border-radius: 0; backdrop-filter: blur(10px); background: rgba(234, 224, 205, 0.98); } #cart::backdrop { background: rgba(0,0,0,0.5); } #cart:not([open]) { display: none !important; pointer-events: none; } @media (max-width: 450px) { #cart { width: 100% !important; } }  @media (max-width: 768px) { .premium-video-section { height: 40vh !important; min-height: 280px !important; } .premium-content { padding: 0 15px !important; } .premium-headline { font-size: 26px !important; } .premium-text { font-size: 11px !important; } } </style>
- <style>#shopify-chat,shopify-chat,.shopify-chat-button{display:none!important}</style>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
- <script type="module" src="js/carousel.js"></script>
- <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
- <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-</head>
-<body>
- <!-- Preloader -->
- <div id="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #EAE0CD; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease;">
-   <svg width="60" height="60" viewBox="0 0 50 50" class="spinner">
-     <circle cx="25" cy="25" r="20" fill="none" stroke="#2C1810" stroke-width="4" stroke-dasharray="31.4 125.6" stroke-linecap="round" transform="rotate(-90 25 25)">
-       <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite" />
-     </circle>
-   </svg>
-   <div style="font-family: 'Playfair Display', serif; font-size: 24px; color: #2C1810; margin-top: 20px; font-style: italic;">Cafe Aroma</div>
- </div>
- <script>
-   window.addEventListener('load', () => {
-     const preloader = document.getElementById('preloader');
-     if (preloader) {
-       preloader.style.opacity = '0';
-       preloader.style.visibility = 'hidden';
-       setTimeout(() => preloader.remove(), 600);
-     }
-   });
- </script>
- <!-- Nav -->
- <nav class="nav-container">
-   <a href="index.html" class="logo">Cafe Aroma</a>
-   <div class="nav-links">
-     <a href="index.html" class="nav-link active">Home</a>
-     <a href="collections.html" class="nav-link">Shop</a>
-     <a href="blog.html" class="nav-link">Journal</a>
-   </div>
-   <button onclick="document.getElementById('cart').showModal()" style="background:none; border:none; cursor:pointer; color:#2C1810;">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 20a1 1 0 100 2 1 1 0 000-2zm9 0a1 1 0 100 2 1 1 0 000-2zM1 1h2.79l1.9 15h13.1l1.2-11H5.25"/></svg>
-   </button>
- </nav>
- <!-- Lenis Init -->
- <script>
-   const lenis = new Lenis();
-   function raf(time) { lenis.raf(time); requestAnimationFrame(raf);
-    const nav = document.querySelector('.nav-container');
-    window.addEventListener('scroll', () => { if (window.scrollY > 50) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); } }); }
-   requestAnimationFrame(raf);
- </script>
- 
- <shopify-store store-domain="e21d1w-na.myshopify.com" country="US" language="en" public-access-token="94165483cfacc4469db2175db544410c"></shopify-store>
- <shopify-cart id="cart"></shopify-cart>
 
- <!-- HERO -->
- <section id="hero-carousel" class="hero-carousel">
-   <div class="carousel-container">
-     <!-- Slide 1: Dark Espresso -->
-     <div class="carousel-slide active" data-slide="0">
-       <video class="carousel-video" autoplay loop muted playsinline><source src="videos/video-overflow-dark-espresso.mp4" type="video/mp4"></video>
-        <div class="watermark-blocker"></div>
-       <div class="carousel-content-split">
-         <div class="hero-top-left">
-           <p class="carousel-label">SIGNATURE BLEND</p>
-           <h1 class="carousel-headline">Dark Espresso</h1>
-           <p class="carousel-tagline">Bold, intense, unforgettable.</p>
-         </div>
-         <div class="hero-bottom-right">
-           <p class="carousel-description">Rich Arabica beans roasted to perfection.</p>
-           <div class="carousel-price"><span class="price-amount">₹899</span><span class="price-unit">per 250g</span></div>
-           <div class="carousel-cta"><button class="btn-primary" onclick="window.location.href='collections.html'">Shop Now</button></div>
-         </div>
-       </div>
-     </div>
-     <!-- Slide 2: French Vanilla -->
-     <div class="carousel-slide" data-slide="1">
-       <video class="carousel-video" autoplay loop muted playsinline><source src="videos/video-overflow-french-vanilla.mp4" type="video/mp4"></video>
-        <div class="watermark-blocker"></div>
-       <div class="carousel-content-split">
-         <div class="hero-top-left">
-           <p class="carousel-label">PREMIUM ROAST</p>
-           <h1 class="carousel-headline">French Vanilla</h1>
-           <p class="carousel-tagline">Smooth, sweet, elegant.</p>
-         </div>
-         <div class="hero-bottom-right">
-            <div class="carousel-price"><span class="price-amount">₹999</span></div>
-            <div class="carousel-cta"><button class="btn-primary" onclick="window.location.href='collections.html'">Shop Now</button></div>
-         </div>
-       </div>
-     </div>
-     <!-- Slide 3: Hazelnut Brew -->
-     <div class="carousel-slide" data-slide="2">
-       <video class="carousel-video" autoplay loop muted playsinline><source src="videos/video-overflow-hazelnut-brew.mp4" type="video/mp4"></video>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafe Aroma | Brewed to Perfection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/hero-carousel.css">
+  <link rel="stylesheet" href="css/products.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/features.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      max-width: 100vw !important;
+      overflow-x: hidden !important;
+    }
+
+    html.lenis,
+    html.lenis body {
+      height: auto;
+    }
+
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+
+    .lenis.lenis-scrolling iframe {
+      pointer-events: none;
+    }
+
+    .nav-container {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: transparent;
+      transition: background 0.3s ease;
+      padding: 24px 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+
+    .nav-container>* {
+      pointer-events: auto;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #2C1810;
+      text-decoration: none;
+      font-style: italic;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-link {
+      color: #2C1810;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      opacity: 1;
+    }
+
+    .premium-video-section {
+      position: relative;
+      height: 60vh;
+      min-height: 450px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+    }
+
+    .premium-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .premium-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    .premium-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .premium-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--color-caramel);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .premium-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 44px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .premium-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      line-height: 1.6;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .nav-container.scrolled {
+      background: #EDE0D4;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        padding: 12px 16px !important;
+        flex-wrap: nowrap !important;
+      }
+
+      .nav-links {
+        gap: 8px !important;
+        flex-wrap: nowrap !important;
+      }
+
+      .logo {
+        font-size: 16px !important;
+        white-space: nowrap !important;
+      }
+
+      .nav-link {
+        font-size: 10px !important;
+        letter-spacing: 0 !important;
+        white-space: nowrap !important;
+      }
+
+      .premium-headline {
+        font-size: 32px !important;
+      }
+
+      .testimonials-title {
+        font-size: 32px !important;
+      }
+
+      .testimonial-card {
+        padding: 50px 16px 30px !important;
+      }
+
+      .testimonial-text {
+        font-size: 13px !important;
+      }
+
+      .testimonial-nav {
+        display: none !important;
+      }
+    }
+
+    #cart {
+      width: 100%;
+      max-width: 450px;
+      height: 100%;
+      max-height: 100vh;
+      position: fixed;
+      right: 0;
+      left: auto;
+      margin: 0;
+      border: none;
+      border-radius: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(234, 224, 205, 0.98);
+    }
+
+    #cart::backdrop {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    #cart:not([open]) {
+      display: none !important;
+      pointer-events: none;
+    }
+
+    @media (max-width: 450px) {
+      #cart {
+        width: 100% !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .premium-video-section {
+        height: 40vh !important;
+        min-height: 280px !important;
+      }
+
+      .premium-content {
+        padding: 0 15px !important;
+      }
+
+      .premium-headline {
+        font-size: 26px !important;
+      }
+
+      .premium-text {
+        font-size: 11px !important;
+      }
+    }
+  </style>
+  <style>
+    #shopify-chat,
+    shopify-chat,
+    .shopify-chat-button {
+      display: none !important
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script type="module" src="js/carousel.js"></script>
+  <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div id="preloader"
+    style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #EAE0CD; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease;">
+    <svg width="60" height="60" viewBox="0 0 50 50" class="spinner">
+      <circle cx="25" cy="25" r="20" fill="none" stroke="#2C1810" stroke-width="4" stroke-dasharray="31.4 125.6"
+        stroke-linecap="round" transform="rotate(-90 25 25)">
+        <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s"
+          repeatCount="indefinite" />
+      </circle>
+    </svg>
+    <div
+      style="font-family: 'Playfair Display', serif; font-size: 24px; color: #2C1810; margin-top: 20px; font-style: italic;">
+      Cafe Aroma</div>
+    <div id="loading-percentage"
+      style="font-family: 'Inter', sans-serif; font-size: 16px; color: #2C1810; margin-top: 10px; font-weight: 500;">0%
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const preloader = document.getElementById('preloader');
+      const percentText = document.getElementById('loading-percentage');
+      const videos = Array.from(document.querySelectorAll('video'));
+
+      if (videos.length === 0) {
+        finishPreloader();
+        return;
+      }
+
+      let loaded = 0;
+      let displayPercent = 0;
+      let targetPercent = 0;
+
+      // Smooth visual counter
+      const counter = setInterval(() => {
+        if (displayPercent < targetPercent) {
+          displayPercent += Math.ceil((targetPercent - displayPercent) / 5) || 1;
+          percentText.innerText = displayPercent + '%';
+        }
+        if (displayPercent >= 100) {
+          clearInterval(counter);
+          finishPreloader();
+        }
+      }, 30);
+
+      Promise.all(videos.map(async (vid) => {
+        try {
+          let url = vid.src;
+          if (!url || url === window.location.href) {
+            url = vid.dataset.src;
+          }
+          if (!url || url === window.location.href) {
+            const sourceChild = vid.querySelector('source');
+            if (sourceChild) {
+              url = sourceChild.src || sourceChild.getAttribute('src');
+            }
+          }
+
+          if (!url) return; // Will jump to finally block to increment counter
+
+          const isFullUrl = url.startsWith('http') || url.startsWith('blob:');
+          const fetchUrl = isFullUrl ? url : '/' + url;
+
+          const response = await fetch(fetchUrl);
+          const blob = await response.blob();
+          const blobUrl = URL.createObjectURL(blob);
+
+          if (vid.hasAttribute('src') && vid.src) {
+            vid.src = blobUrl;
+          } else if (vid.querySelector('source')) {
+            // Update source tag or just assign to video src directly
+            vid.src = blobUrl;
+          } else {
+            vid.dataset.src = blobUrl;
+          }
+        } catch (e) {
+          console.error('Failed to preload video', e);
+        } finally {
+          loaded++;
+          targetPercent = Math.floor((loaded / videos.length) * 100);
+        }
+      }));
+
+      function finishPreloader() {
+        setTimeout(() => {
+          if (preloader) {
+            preloader.style.opacity = '0';
+            preloader.style.visibility = 'hidden';
+            setTimeout(() => preloader.remove(), 600);
+          }
+        }, 200);
+      }
+    });
+  </script>
+  <!-- Nav -->
+  <nav class="nav-container">
+    <a href="index.html" class="logo">Cafe Aroma</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="collections.html" class="nav-link">Shop</a>
+      <a href="blog.html" class="nav-link">Journal</a>
+    </div>
+    <button onclick="document.getElementById('cart').showModal()"
+      style="background:none; border:none; cursor:pointer; color:#2C1810;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M9 20a1 1 0 100 2 1 1 0 000-2zm9 0a1 1 0 100 2 1 1 0 000-2zM1 1h2.79l1.9 15h13.1l1.2-11H5.25" />
+      </svg>
+    </button>
+  </nav>
+  <!-- Lenis Init -->
+  <script>
+    const lenis = new Lenis();
+    function raf(time) {
+      lenis.raf(time); requestAnimationFrame(raf);
+      const nav = document.querySelector('.nav-container');
+      window.addEventListener('scroll', () => { if (window.scrollY > 50) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); } });
+    }
+    requestAnimationFrame(raf);
+  </script>
+
+  <shopify-store store-domain="e21d1w-na.myshopify.com" country="US" language="en"
+    public-access-token="94165483cfacc4469db2175db544410c"></shopify-store>
+  <shopify-cart id="cart"></shopify-cart>
+
+  <!-- HERO -->
+  <section id="hero-carousel" class="hero-carousel">
+    <div class="carousel-container">
+      <!-- Slide 1: Dark Espresso -->
+      <div class="carousel-slide active" data-slide="0">
+        <video class="carousel-video" autoplay loop muted playsinline>
+          <source src="videos/video-overflow-dark-espresso.mp4" type="video/mp4">
+        </video>
         <div class="watermark-blocker"></div>
         <div class="carousel-content-split">
-         <div class="hero-top-left">
-           <p class="carousel-label">SEASONAL</p>
-           <h1 class="carousel-headline">Hazelnut Brew</h1>
-         </div>
+          <div class="hero-top-left">
+            <p class="carousel-label">SIGNATURE BLEND</p>
+            <h1 class="carousel-headline">Dark Espresso</h1>
+            <p class="carousel-tagline">Bold, intense, unforgettable.</p>
+          </div>
+          <div class="hero-bottom-right">
+            <p class="carousel-description">Rich Arabica beans roasted to perfection.</p>
+            <div class="carousel-price"><span class="price-amount">₹899</span><span class="price-unit">per 250g</span>
+            </div>
+            <div class="carousel-cta"><button class="btn-primary" onclick="window.location.href='collections.html'">Shop
+                Now</button></div>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 2: French Vanilla -->
+      <div class="carousel-slide" data-slide="1">
+        <video class="carousel-video" autoplay loop muted playsinline>
+          <source src="videos/video-overflow-french-vanilla.mp4" type="video/mp4">
+        </video>
+        <div class="watermark-blocker"></div>
+        <div class="carousel-content-split">
+          <div class="hero-top-left">
+            <p class="carousel-label">PREMIUM ROAST</p>
+            <h1 class="carousel-headline">French Vanilla</h1>
+            <p class="carousel-tagline">Smooth, sweet, elegant.</p>
+          </div>
           <div class="hero-bottom-right">
             <div class="carousel-price"><span class="price-amount">₹999</span></div>
-            <div class="carousel-cta"><button class="btn-primary" onclick="window.location.href='collections.html'">Shop Now</button></div>
-         </div>
-       </div>
-     </div>
-   </div>
-   <!-- Nav Arrows & Pagination -->
-   <button class="carousel-nav carousel-nav--prev" onclick="prevSlide()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18L9 12L15 6"/></svg></button>
-   <button class="carousel-nav carousel-nav--next" onclick="nextSlide()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6L15 12L9 18"/></svg></button>
-   <div class="carousel-pagination">
-     <button class="pagination-dot active" onclick="goToSlide(0)"></button>
-     <button class="pagination-dot" onclick="goToSlide(1)"></button>
-     <button class="pagination-dot" onclick="goToSlide(2)"></button>
-   </div>
- </section>
- 
-  
+            <div class="carousel-cta"><button class="btn-primary" onclick="window.location.href='collections.html'">Shop
+                Now</button></div>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 3: Hazelnut Brew -->
+      <div class="carousel-slide" data-slide="2">
+        <video class="carousel-video" autoplay loop muted playsinline>
+          <source src="videos/video-overflow-hazelnut-brew.mp4" type="video/mp4">
+        </video>
+        <div class="watermark-blocker"></div>
+        <div class="carousel-content-split">
+          <div class="hero-top-left">
+            <p class="carousel-label">SEASONAL</p>
+            <h1 class="carousel-headline">Hazelnut Brew</h1>
+          </div>
+          <div class="hero-bottom-right">
+            <div class="carousel-price"><span class="price-amount">₹999</span></div>
+            <div class="carousel-cta"><button class="btn-primary" onclick="window.location.href='collections.html'">Shop
+                Now</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Nav Arrows & Pagination -->
+    <button class="carousel-nav carousel-nav--prev" onclick="prevSlide()"><svg width="24" height="24"
+        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 18L9 12L15 6" />
+      </svg></button>
+    <button class="carousel-nav carousel-nav--next" onclick="nextSlide()"><svg width="24" height="24"
+        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 6L15 12L9 18" />
+      </svg></button>
+    <div class="carousel-pagination">
+      <button class="pagination-dot active" onclick="goToSlide(0)"></button>
+      <button class="pagination-dot" onclick="goToSlide(1)"></button>
+      <button class="pagination-dot" onclick="goToSlide(2)"></button>
+    </div>
+  </section>
+
+
   <!-- COFFEE HEAVEN SECTION -->
   <section class="feature-section" id="coffee-heaven">
     <div class="feature-split">
@@ -197,7 +490,8 @@
       </div>
       <div class="feature-text">
         <h2 class="feature-title">Coffee Heaven</h2>
-        <p class="feature-desc">Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s.</p>
+        <p class="feature-desc">Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum
+          Has Been The Industry's Standard Dummy Text Ever Since The 1500s.</p>
         <button class="btn-dark" onclick="window.location.href='collections.html'">View All &rarr;</button>
       </div>
     </div>
@@ -216,7 +510,8 @@
       </div>
       <div class="feature-text">
         <h2 class="feature-title">Jean's Coffee</h2>
-        <p class="feature-desc">Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s.</p>
+        <p class="feature-desc">Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum
+          Has Been The Industry's Standard Dummy Text Ever Since The 1500s.</p>
         <button class="btn-grey" onclick="window.location.href='collections.html'">View All &rarr;</button>
       </div>
     </div>
@@ -230,20 +525,27 @@
       <div class="testimonials-track-wrap">
         <div class="testimonials-track" id="testimonials-track">
           <div class="testimonial-card">
-            <div class="testimonial-avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Shalima Hayden"></div>
-            <p class="testimonial-text">I Have Tested Caffeine Coffee Many Times. Really Amazing To Me. The Combination Was Very Good. One Thing Is To Serve Extraordinary Coffee With Caffeine. I Will Order From Caffeine For Any Of My Coffee Needs.</p>
+            <div class="testimonial-avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg"
+                alt="Shalima Hayden"></div>
+            <p class="testimonial-text">I Have Tested Caffeine Coffee Many Times. Really Amazing To Me. The Combination
+              Was Very Good. One Thing Is To Serve Extraordinary Coffee With Caffeine. I Will Order From Caffeine For
+              Any Of My Coffee Needs.</p>
             <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="testimonial-name">Shalima Hayden</p>
           </div>
           <div class="testimonial-card">
-            <div class="testimonial-avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James Brewer"></div>
-            <p class="testimonial-text">Every morning starts with Cafe Aroma. The dark espresso blend is unmatched — bold, smooth, and rich. Absolutely love the experience and the quality they deliver every single time.</p>
+            <div class="testimonial-avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt="James Brewer"></div>
+            <p class="testimonial-text">Every morning starts with Cafe Aroma. The dark espresso blend is unmatched —
+              bold, smooth, and rich. Absolutely love the experience and the quality they deliver every single time.</p>
             <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="testimonial-name">James Brewer</p>
           </div>
           <div class="testimonial-card">
-            <div class="testimonial-avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya Mehta"></div>
-            <p class="testimonial-text">The French Vanilla blend is divine. It smells heavenly, brews perfectly, and tastes like a dream. Cafe Aroma has become a staple in my home. Highly recommend to all coffee lovers!</p>
+            <div class="testimonial-avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg"
+                alt="Priya Mehta"></div>
+            <p class="testimonial-text">The French Vanilla blend is divine. It smells heavenly, brews perfectly, and
+              tastes like a dream. Cafe Aroma has become a staple in my home. Highly recommend to all coffee lovers!</p>
             <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="testimonial-name">Priya Mehta</p>
           </div>
@@ -253,19 +555,109 @@
     </div>
   </section>
   <style>
-    .testimonials-section { background: var(--color-cream); padding: 80px 40px; text-align: center; }
-    .testimonials-title { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #2C1810; margin-bottom: 48px; letter-spacing: -0.01em; }
-    .testimonials-carousel { display: flex; align-items: center; justify-content: center; gap: 20px; max-width: 900px; margin: 0 auto; }
-    .testimonials-track-wrap { overflow: hidden; flex: 1; }
-    .testimonials-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
-    .testimonial-card { min-width: 100%; background: #2C1810; border-radius: 12px; padding: 60px 40px 40px; color: #FFF; text-align: center; box-sizing: border-box; position: relative; margin-top: 40px; }
-    .testimonial-avatar { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); border: 4px solid #EDE0D4; }
-    .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .testimonial-text { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.9); margin: 0 auto 20px; max-width: 600px; }
-    .testimonial-stars { color: #D4A574; font-size: 22px; letter-spacing: 4px; margin-bottom: 8px; }
-    .testimonial-name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px; color: #FFF; }
-    .testimonial-nav { width: 48px; height: 48px; background: #2C1810; color: #FFF; border: none; border-radius: 6px; font-size: 20px; cursor: pointer; flex-shrink: 0; transition: background 0.3s; }
-    .testimonial-nav:hover { background: #4a2c1a; }
+    .testimonials-section {
+      background: var(--color-cream);
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .testimonials-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: #2C1810;
+      margin-bottom: 48px;
+      letter-spacing: -0.01em;
+    }
+
+    .testimonials-carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .testimonials-track-wrap {
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .testimonials-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .testimonial-card {
+      min-width: 100%;
+      background: #2C1810;
+      border-radius: 12px;
+      padding: 60px 40px 40px;
+      color: #FFF;
+      text-align: center;
+      box-sizing: border-box;
+      position: relative;
+      margin-top: 40px;
+    }
+
+    .testimonial-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid #EDE0D4;
+    }
+
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .testimonial-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 auto 20px;
+      max-width: 600px;
+    }
+
+    .testimonial-stars {
+      color: #D4A574;
+      font-size: 22px;
+      letter-spacing: 4px;
+      margin-bottom: 8px;
+    }
+
+    .testimonial-name {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: #FFF;
+    }
+
+    .testimonial-nav {
+      width: 48px;
+      height: 48px;
+      background: #2C1810;
+      color: #FFF;
+      border: none;
+      border-radius: 6px;
+      font-size: 20px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+
+    .testimonial-nav:hover {
+      background: #4a2c1a;
+    }
   </style>
   <script>
     let testimonialIdx = 0;
@@ -276,76 +668,77 @@
   </script>
 
   <!-- THE ROAST -->
- <section class="premium-video-section">
-   <!-- Replace src with your video when ready -->
-   <video class="premium-video-bg" loop muted playsinline data-src="videos/video1.mp4"></video>
-   <div class="premium-overlay" style="background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));"></div>
-   <div class="premium-content">
-     <span class="premium-label">THE PROCESS</span>
-     <h2 class="premium-headline">Masterfully Roasted</h2>
-     <p class="premium-text">We coax out the hidden flavors of every bean. The heat is our brush, the bean our canvas.</p>
-   </div>
- </section>
- <!-- THE GRIND -->
- <section class="premium-video-section">
-   <!-- Replace src with your video when ready -->
-   <video class="premium-video-bg" loop muted playsinline data-src="videos/video2.mp4"></video>
-   <div class="premium-overlay" style="background: rgba(0,0,0,0.3);"></div>
-   <div class="premium-content" style="text-align: left; margin-left: 0; max-width: 1200px; width: 100%;">
+  <section class="premium-video-section">
+    <!-- Replace src with your video when ready -->
+    <video class="premium-video-bg" loop muted playsinline data-src="videos/video1.mp4"></video>
+    <div class="premium-overlay" style="background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));"></div>
+    <div class="premium-content">
+      <span class="premium-label">THE PROCESS</span>
+      <h2 class="premium-headline">Masterfully Roasted</h2>
+      <p class="premium-text">We coax out the hidden flavors of every bean. The heat is our brush, the bean our canvas.
+      </p>
+    </div>
+  </section>
+  <!-- THE GRIND -->
+  <section class="premium-video-section">
+    <!-- Replace src with your video when ready -->
+    <video class="premium-video-bg" loop muted playsinline data-src="videos/video2.mp4"></video>
+    <div class="premium-overlay" style="background: rgba(0,0,0,0.3);"></div>
+    <div class="premium-content" style="text-align: left; margin-left: 0; max-width: 1200px; width: 100%;">
       <div style="max-width: 500px;">
-       <span class="premium-label" style="color:#FFF;">PRECISION</span>
-       <h2 class="premium-headline" style="font-size: 44px;">The Perfect Grind</h2>
-     </div>
-   </div>
- </section>
- <!-- PRODUCTS -->
- <section id="products" class="products-section">
-   <div class="container">
-     <div class="section-header">
-       <p class="section-label">OUR COLLECTION</p>
-       <h2 class="section-headline">Discover Our Coffees</h2>
-     </div>
-     <div class="products-grid">
-       <!-- Static product cards using local images -->
-       <div class="product-card">
-         <a href="product.html?handle=cafe-aroma-dark-espresso-shot" style="display:block; text-decoration:none;">
-           <div class="product-card__image-wrapper">
-             <img src="images/product-dark-espresso.jpg" alt="Dark Espresso" class="product-card__image">
-           </div>
-           <div class="product-card__content">
-             <div class="product-card__title">Dark Espresso</div>
-             <div class="product-card__price">₹899</div>
-           </div>
-         </a>
-       </div>
-       <div class="product-card">
-         <a href="product.html?handle=cafe-aroma-dark-espresso-shot" style="display:block; text-decoration:none;">
-           <div class="product-card__image-wrapper">
-             <img src="images/product-french-vanilla.jpg" alt="French Vanilla" class="product-card__image">
-           </div>
-           <div class="product-card__content">
-             <div class="product-card__title">French Vanilla</div>
-             <div class="product-card__price">₹999</div>
-           </div>
-         </a>
-       </div>
-       <div class="product-card">
-         <a href="product.html?handle=cafe-aroma-dark-espresso-shot" style="display:block; text-decoration:none;">
-           <div class="product-card__image-wrapper">
-             <img src="images/product-hazelnut-brew.jpg" alt="Hazelnut Brew" class="product-card__image">
-           </div>
-           <div class="product-card__content">
-             <div class="product-card__title">Hazelnut Brew</div>
-             <div class="product-card__price">₹999</div>
-           </div>
-         </a>
-       </div>
-       <!-- Add more product cards here when ready -->
-     </div>
-   </div>
- </section>
- 
-   <!-- NEW EXPERIENCE VIDEO -->
+        <span class="premium-label" style="color:#FFF;">PRECISION</span>
+        <h2 class="premium-headline" style="font-size: 44px;">The Perfect Grind</h2>
+      </div>
+    </div>
+  </section>
+  <!-- PRODUCTS -->
+  <section id="products" class="products-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">OUR COLLECTION</p>
+        <h2 class="section-headline">Discover Our Coffees</h2>
+      </div>
+      <div class="products-grid">
+        <!-- Static product cards using local images -->
+        <div class="product-card">
+          <a href="product.html?handle=cafe-aroma-dark-espresso-shot" style="display:block; text-decoration:none;">
+            <div class="product-card__image-wrapper">
+              <img src="images/product-dark-espresso.jpg" alt="Dark Espresso" class="product-card__image">
+            </div>
+            <div class="product-card__content">
+              <div class="product-card__title">Dark Espresso</div>
+              <div class="product-card__price">₹899</div>
+            </div>
+          </a>
+        </div>
+        <div class="product-card">
+          <a href="product.html?handle=cafe-aroma-dark-espresso-shot" style="display:block; text-decoration:none;">
+            <div class="product-card__image-wrapper">
+              <img src="images/product-french-vanilla.jpg" alt="French Vanilla" class="product-card__image">
+            </div>
+            <div class="product-card__content">
+              <div class="product-card__title">French Vanilla</div>
+              <div class="product-card__price">₹999</div>
+            </div>
+          </a>
+        </div>
+        <div class="product-card">
+          <a href="product.html?handle=cafe-aroma-dark-espresso-shot" style="display:block; text-decoration:none;">
+            <div class="product-card__image-wrapper">
+              <img src="images/product-hazelnut-brew.jpg" alt="Hazelnut Brew" class="product-card__image">
+            </div>
+            <div class="product-card__content">
+              <div class="product-card__title">Hazelnut Brew</div>
+              <div class="product-card__price">₹999</div>
+            </div>
+          </a>
+        </div>
+        <!-- Add more product cards here when ready -->
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW EXPERIENCE VIDEO -->
   <section class="premium-video-section" id="sensory-experience">
     <video class="premium-video-bg" loop muted playsinline data-src="videos/VID_20260403_023457_200_bsl.mp4"></video>
     <div class="premium-overlay"></div>
@@ -388,9 +781,10 @@
         <a href="#">FAQs</a>
       </div>
     </div>
-    
+
     <div class="footer-basement">
-      <p class="shop-ways">More ways to shop: <a href="#">Find an Aroma Cafe</a> or <a href="#">other retailer</a> near you.</p>
+      <p class="shop-ways">More ways to shop: <a href="#">Find an Aroma Cafe</a> or <a href="#">other retailer</a> near
+        you.</p>
       <div class="basement-divider"></div>
       <div class="basement-bottom">
         <p class="copyright">Copyright © 2026 Cafe Aroma Inc. All rights reserved.</p>
@@ -406,10 +800,17 @@
     </div>
   </footer>
 
-  
+
   <style>
-    .nav-light-text .logo, .nav-light-text .nav-link, .nav-light-text button { color: #FFF !important; }
-    .nav-light-text button svg { stroke: #FFF !important; }
+    .nav-light-text .logo,
+    .nav-light-text .nav-link,
+    .nav-light-text button {
+      color: #FFF !important;
+    }
+
+    .nav-light-text button svg {
+      stroke: #FFF !important;
+    }
   </style>
 
   <!-- dynamic navbar -->
@@ -417,9 +818,9 @@
     document.addEventListener('DOMContentLoaded', () => {
       const nav = document.querySelector('.nav-container');
       nav.style.transition = 'background 0.4s ease, backdrop-filter 0.4s ease';
-      
+
       const sections = document.querySelectorAll('section, footer');
-      
+
       window.addEventListener('scroll', () => {
         if (window.scrollY < 10) {
           nav.style.background = 'transparent';
@@ -427,10 +828,10 @@
           nav.classList.remove('nav-light-text'); // Text remains dark brown
           return;
         }
-        
+
         let currentSection = null;
         const navHeight = nav.offsetHeight || 80;
-        
+
         for (let sec of sections) {
           const rect = sec.getBoundingClientRect();
           if (rect.top <= navHeight + 10 && rect.bottom > navHeight) {
@@ -438,30 +839,30 @@
             break;
           }
         }
-        
+
         if (currentSection) {
           if (currentSection.id === 'hero-carousel' || currentSection.classList.contains('premium-video-section')) {
-             nav.style.background = 'transparent';
-             nav.style.backdropFilter = 'none';
-             nav.classList.remove('nav-light-text');
+            nav.style.background = 'transparent';
+            nav.style.backdropFilter = 'none';
+            nav.classList.remove('nav-light-text');
           } else if (currentSection.tagName.toLowerCase() === 'footer') {
-             // Turn exactly the footer color and make text white
-             nav.style.background = '#000';
-             nav.style.backdropFilter = 'none';
-             nav.classList.add('nav-light-text');
+            // Turn exactly the footer color and make text white
+            nav.style.background = '#000';
+            nav.style.backdropFilter = 'none';
+            nav.classList.add('nav-light-text');
           } else if (false) {
-             nav.classList.add('nav-light-text'); // Dark bg, so white text
+            nav.classList.add('nav-light-text'); // Dark bg, so white text
           } else {
-             const bgColor = window.getComputedStyle(currentSection).backgroundColor;
-             nav.style.background = bgColor !== 'rgba(0, 0, 0, 0)' ? bgColor : '#FFF';
-             nav.style.backdropFilter = 'none';
-             
-             // If section background is very dark, make text white. Otherwise remove class.
-             if (bgColor === 'rgb(44, 24, 16)' || bgColor === '#2C1810') {
-               nav.classList.add('nav-light-text');
-             } else {
-               nav.classList.remove('nav-light-text');
-             }
+            const bgColor = window.getComputedStyle(currentSection).backgroundColor;
+            nav.style.background = bgColor !== 'rgba(0, 0, 0, 0)' ? bgColor : '#FFF';
+            nav.style.backdropFilter = 'none';
+
+            // If section background is very dark, make text white. Otherwise remove class.
+            if (bgColor === 'rgb(44, 24, 16)' || bgColor === '#2C1810') {
+              nav.classList.add('nav-light-text');
+            } else {
+              nav.classList.remove('nav-light-text');
+            }
           }
         }
       });
@@ -471,30 +872,57 @@
 
   <!-- Floating WhatsApp Button -->
   <a href="https://wa.me/7986840344" target="_blank" class="whatsapp-float" aria-label="Chat with us on WhatsApp">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
     <span>Chat Now</span>
   </a>
 
   <style>
     .whatsapp-float {
-        position: fixed; bottom: 40px; right: 40px;
-        background: #2C1810; color: #FFF;
-        padding: 12px 24px; border-radius: 50px;
-        display: flex; align-items: center; gap: 10px;
-        text-decoration: none; font-family: 'Inter', sans-serif;
-        font-weight: 600; font-size: 14px;
-        z-index: 9999; box-shadow: 0 10px 25px rgba(44, 24, 16, 0.2);
-        transition: transform 0.3s, background 0.3s;
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      background: #2C1810;
+      color: #FFF;
+      padding: 12px 24px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      z-index: 9999;
+      box-shadow: 0 10px 25px rgba(44, 24, 16, 0.2);
+      transition: transform 0.3s, background 0.3s;
     }
-    .whatsapp-float:hover { transform: translateY(-5px); background: #4a2c1a; }
-    .whatsapp-float svg { width: 20px; height: 20px; }
-    
+
+    .whatsapp-float:hover {
+      transform: translateY(-5px);
+      background: #4a2c1a;
+    }
+
+    .whatsapp-float svg {
+      width: 20px;
+      height: 20px;
+    }
+
     @media (max-width: 768px) {
-        .whatsapp-float { bottom: 20px; right: 20px; padding: 10px 18px; }
-        .whatsapp-float span { display: none; }
+      .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 18px;
+      }
+
+      .whatsapp-float span {
+        display: none;
+      }
     }
   </style>
 
   <script src="lazy_load_videos.js"></script>
 </body>
+
 </html>
