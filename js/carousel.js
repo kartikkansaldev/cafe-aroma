@@ -1,7 +1,9 @@
 let currentSlide = 0;
 const totalSlides = 3;
-let autoplayInterval;
-const AUTOPLAY_DELAY = 7000;
+let autoplayTimer;
+
+// Per-slide durations in milliseconds (how long each slide shows before switching)
+const SLIDE_DELAYS = [7000, 6000, 7000];
 
 document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
@@ -10,18 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initCarousel() {
   const videos = document.querySelectorAll('.carousel-video');
-  // Start first video
   if (videos[0]) {
     videos[0].muted = true;
     videos[0].currentTime = 0;
     videos[0].play().catch(e => console.log('Autoplay prevented:', e));
   }
-}
-
-function goToSlide(slideIndex) {
-  stopAutoplay();
-  _switchToSlide(slideIndex);
-  setTimeout(() => startAutoplay(), 3000);
 }
 
 function _switchToSlide(slideIndex) {
@@ -33,9 +28,7 @@ function _switchToSlide(slideIndex) {
   // Hide current slide and pause its video
   slides[currentSlide].classList.remove('active');
   dots[currentSlide].classList.remove('active');
-  if (videos[currentSlide]) {
-    videos[currentSlide].pause();
-  }
+  if (videos[currentSlide]) videos[currentSlide].pause();
 
   // Show new slide and restart its video from beginning
   currentSlide = slideIndex;
@@ -48,26 +41,36 @@ function _switchToSlide(slideIndex) {
   }
 }
 
-function nextSlide() {
-  const nextIndex = (currentSlide + 1) % totalSlides;
-  goToSlide(nextIndex);
-}
-
-function prevSlide() {
-  const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
-  goToSlide(prevIndex);
-}
-
 function startAutoplay() {
   stopAutoplay();
-  autoplayInterval = setInterval(() => {
-    const nextIndex = (currentSlide + 1) % totalSlides;
-    _switchToSlide(nextIndex);
-  }, AUTOPLAY_DELAY);
+  function scheduleNext() {
+    const delay = SLIDE_DELAYS[currentSlide];
+    autoplayTimer = setTimeout(() => {
+      const nextIndex = (currentSlide + 1) % totalSlides;
+      _switchToSlide(nextIndex);
+      scheduleNext();
+    }, delay);
+  }
+  scheduleNext();
 }
 
 function stopAutoplay() {
-  if (autoplayInterval) clearInterval(autoplayInterval);
+  if (autoplayTimer) clearTimeout(autoplayTimer);
+}
+
+function goToSlide(slideIndex) {
+  stopAutoplay();
+  _switchToSlide(slideIndex);
+  // Resume autoplay after 3s from user interaction
+  setTimeout(() => startAutoplay(), 3000);
+}
+
+function nextSlide() {
+  goToSlide((currentSlide + 1) % totalSlides);
+}
+
+function prevSlide() {
+  goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
 }
 
 window.prevSlide = prevSlide;
