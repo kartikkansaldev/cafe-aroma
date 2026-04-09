@@ -3,74 +3,61 @@ const totalSlides = 3;
 let autoplayInterval;
 const AUTOPLAY_DELAY = 7000;
 document.addEventListener('DOMContentLoaded', () => {
- initCarousel();
- startAutoplay();
+  initCarousel();
+  startAutoplay();
 });
 function initCarousel() {
- const videos = document.querySelectorAll('.carousel-video');
- if (videos[0]) {
-   videos[0].muted = true;
-   videos[0].play().catch(e => console.log('Autoplay prevented:', e));
- }
- videos.forEach((video, index) => {
-   if (index > 0) video.load();
- });
+  const videos = document.querySelectorAll('.carousel-video');
+  videos.forEach((video) => {
+    video.muted = true;
+    video.play().catch(e => console.log('Autoplay prevented:', e));
+  });
 }
 function goToSlide(slideIndex) {
- stopAutoplay();
- const slides = document.querySelectorAll('.carousel-slide');
- const videos = document.querySelectorAll('.carousel-video');
- const dots = document.querySelectorAll('.pagination-dot');
- if (!slides.length) return;
- slides[currentSlide].classList.remove('active');
- dots[currentSlide].classList.remove('active');
- if (videos[currentSlide]) videos[currentSlide].pause();
- currentSlide = slideIndex;
- slides[currentSlide].classList.add('active');
- dots[currentSlide].classList.add('active');
- if (videos[currentSlide]) {
-   videos[currentSlide].currentTime = 0;
-   videos[currentSlide].play().catch(e => console.log('Autoplay prevented:', e));
- }
- setTimeout(() => startAutoplay(), 3000);
+  stopAutoplay();
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.pagination-dot');
+  if (!slides.length) return;
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+
+  currentSlide = slideIndex;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+
+  setTimeout(() => startAutoplay(), 3000);
 }
 function nextSlide() {
- const nextIndex = (currentSlide + 1) % totalSlides;
- goToSlide(nextIndex);
+  const nextIndex = (currentSlide + 1) % totalSlides;
+  goToSlide(nextIndex);
 }
 function prevSlide() {
- const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
- goToSlide(prevIndex);
+  const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+  goToSlide(prevIndex);
 }
 function startAutoplay() {
- stopAutoplay();
- autoplayInterval = setInterval(() => {
-   const nextIndex = (currentSlide + 1) % totalSlides;
-   const slides = document.querySelectorAll('.carousel-slide');
-   const videos = document.querySelectorAll('.carousel-video');
-   const dots = document.querySelectorAll('.pagination-dot');
-   if (!slides.length) return;
-   slides[currentSlide].classList.remove('active');
-   dots[currentSlide].classList.remove('active');
-   if (videos[currentSlide]) videos[currentSlide].pause();
-   currentSlide = nextIndex;
-   slides[currentSlide].classList.add('active');
-   dots[currentSlide].classList.add('active');
-   if (videos[currentSlide]) {
-     videos[currentSlide].currentTime = 0;
-     videos[currentSlide].muted = true;
-    videos[currentSlide].muted = true;
-    videos[currentSlide].play().catch(e => console.log('Autoplay prevented:', e));
-   }
- }, AUTOPLAY_DELAY);
+  stopAutoplay();
+  autoplayInterval = setInterval(() => {
+    const nextIndex = (currentSlide + 1) % totalSlides;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.pagination-dot');
+    if (!slides.length) return;
+
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+
+    currentSlide = nextIndex;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }, AUTOPLAY_DELAY);
 }
 function stopAutoplay() {
- if (autoplayInterval) clearInterval(autoplayInterval);
+  if (autoplayInterval) clearInterval(autoplayInterval);
 }
 window.prevSlide = prevSlide;
 window.nextSlide = nextSlide;
 window.goToSlide = goToSlide;
 window.scrollToProducts = function (handle) {
- const p = document.getElementById('products');
- if (p) p.scrollIntoView({ behavior: 'smooth' });
+  const p = document.getElementById('products');
+  if (p) p.scrollIntoView({ behavior: 'smooth' });
 }
