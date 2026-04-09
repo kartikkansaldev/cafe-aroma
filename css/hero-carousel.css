@@ -44,14 +44,15 @@ body, html {
    width: 100%;
    height: 100%;
    opacity: 0;
-   visibility: hidden;
-   transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
-       visibility 1s cubic-bezier(0.4, 0, 0.2, 1);
+   visibility: visible;
+   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+   pointer-events: none;
 }
 .carousel-slide.active {
    opacity: 1;
    visibility: visible;
    z-index: 1;
+   pointer-events: auto;
 }
 .carousel-video {
    position: absolute;

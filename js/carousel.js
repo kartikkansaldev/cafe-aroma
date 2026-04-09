@@ -2,7 +2,7 @@ let currentSlide = 0;
 const totalSlides = 3;
 let autoplayTimer;
 
-// Per-slide durations in milliseconds (how long each slide shows before switching)
+// Per-slide durations in milliseconds
 const SLIDE_DELAYS = [7000, 6000, 7000];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,12 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initCarousel() {
+  // Start ALL videos playing immediately in the background.
+  // This ensures they are fully buffered and running — eliminating
+  // any seek/re-buffer freeze when a slide becomes visible.
   const videos = document.querySelectorAll('.carousel-video');
-  if (videos[0]) {
-    videos[0].muted = true;
-    videos[0].currentTime = 0;
-    videos[0].play().catch(e => console.log('Autoplay prevented:', e));
-  }
+  videos.forEach((video, index) => {
+    video.muted = true;
+    video.play().catch(e => console.log('Autoplay prevented:', e));
+  });
 }
 
 function _switchToSlide(slideIndex) {
@@ -25,20 +27,19 @@ function _switchToSlide(slideIndex) {
   const dots = document.querySelectorAll('.pagination-dot');
   if (!slides.length) return;
 
-  // Hide current slide and pause its video
+  // Fade out current slide (video keeps playing in background)
   slides[currentSlide].classList.remove('active');
   dots[currentSlide].classList.remove('active');
-  if (videos[currentSlide]) videos[currentSlide].pause();
 
-  // Show new slide and restart its video from beginning
+  // Seek the incoming video to start, then fade it in.
+  // Because the video is already playing & buffered, the seek is instantaneous.
   currentSlide = slideIndex;
+  const incomingVideo = videos[currentSlide];
+  if (incomingVideo) {
+    incomingVideo.currentTime = 0;
+  }
   slides[currentSlide].classList.add('active');
   dots[currentSlide].classList.add('active');
-  if (videos[currentSlide]) {
-    videos[currentSlide].muted = true;
-    videos[currentSlide].currentTime = 0;
-    videos[currentSlide].play().catch(e => console.log('Autoplay prevented:', e));
-  }
 }
 
 function startAutoplay() {
@@ -61,7 +62,6 @@ function stopAutoplay() {
 function goToSlide(slideIndex) {
   stopAutoplay();
   _switchToSlide(slideIndex);
-  // Resume autoplay after 3s from user interaction
   setTimeout(() => startAutoplay(), 3000);
 }
 
